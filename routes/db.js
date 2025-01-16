@@ -1,11 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { addEmployee, getEmployees, deleteEmployee, updateEmployee} = require("../controllers/db");
+const { addUserFavorite , getUserFavorite} = require("../controllers/db");
 
-router.post("/addEmployee", addEmployee);
-router.get("/getEmployees", getEmployees);
-router.delete("/deleteEmployee/:id", deleteEmployee);
-router.put("/updateEmployee/:id", updateEmployee); 
-
+router.post("/addFavorite", addUserFavorite);
+router.get("/getUserFavorite/:userId", getUserFavorite);
 
 module.exports = router;
