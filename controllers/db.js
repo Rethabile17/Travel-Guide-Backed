@@ -5,12 +5,13 @@ const {
 } = require("firebase/firestore");
 const { db } = require("../config/firebase");
 
-
 const getUserFavorite = async (req, res) => {
   const { userId } = req.params;
 
   try {
-    const querySnapshot = await getDocs(collection(db, `users/${userId}/favorites`));
+    const querySnapshot = await getDocs(
+      collection(db, `users/${userId}/favorites`)
+    );
     const data = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -40,9 +41,7 @@ const addUserFavorite = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   getUserFavorite,
-  addUserFavorite
+  addUserFavorite,
 };

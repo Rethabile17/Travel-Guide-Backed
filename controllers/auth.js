@@ -5,7 +5,7 @@ const {
   sendPasswordResetEmail,
 } = require("firebase/auth");
 
-const { doc, setDoc } = require("firebase/firestore");
+const { doc, setDoc, collection } = require("firebase/firestore");
 
 const createAccount = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
@@ -18,11 +18,12 @@ const createAccount = async (req, res) => {
     );
     const user = userCredential.user;
 
-    // const userProfileRef = doc(db, "users", user.uid);
-    // await setDoc(userProfileRef, {
-    //   firstName: firstName,
-    //   lastName: lastName,
-    // });
+    const userProfileRef = doc(collection(db, "users", user.uid, "profile"));
+    await setDoc(userProfileRef, {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    });
 
     return res
       .status(201)
